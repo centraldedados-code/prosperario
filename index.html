@@ -23,11 +23,15 @@ h1,h2,h3,.font-display{font-family:'Montserrat',Arial,sans-serif}
 .wrap{max-width:1080px;margin:0 auto;padding:28px 18px 60px}
 
 /* PASSWORD SCREEN */
-#pwd-overlay{position:fixed;inset:0;z-index:9999;background:var(--azul-principal);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+#pwd-overlay{position:fixed;inset:0;z-index:9999;background:var(--azul-principal);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;overflow-y:auto}
 #pwd-overlay.hidden{display:none}
-.pwd-box{background:#fff;border-radius:16px;padding:38px 40px;max-width:400px;width:100%;text-align:center}
-.pwd-eyebrow{color:var(--amarelo-acento);font-family:'Montserrat',sans-serif;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
-.pwd-title{font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:var(--azul-principal);margin-bottom:6px}
+.pwd-wrap{width:100%;max-width:400px;display:flex;flex-direction:column;align-items:center}
+.pwd-banner{width:100%;background:linear-gradient(135deg,var(--azul-escuro),var(--azul-principal));border-radius:16px 16px 0 0;padding:26px 20px;text-align:center;position:relative;overflow:hidden}
+.pwd-banner::before{content:"";position:absolute;top:-40px;right:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(0,183,215,0.22),transparent 70%)}
+.pwd-banner-logo{position:relative;max-width:230px;width:70%;height:auto}
+.pwd-box{background:#fff;border-radius:0 0 16px 16px;padding:32px 36px 36px;width:100%;text-align:center}
+.pwd-box-logo{max-width:170px;width:55%;height:auto;margin:0 auto 18px;display:block}
+.pwd-title{color:var(--amarelo-acento);font-family:'Montserrat',sans-serif;font-weight:800;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;line-height:1.5}
 .pwd-hint{font-size:12px;color:#7a8699;margin-bottom:22px}
 .pwd-input-wrap{position:relative;margin-bottom:16px}
 .pwd-input{width:100%;padding:13px 46px 13px 16px;border:2px solid #dde4ee;border-radius:10px;font-size:15px;outline:none;letter-spacing:2px;font-family:Arial,sans-serif;color:var(--azul-principal);transition:border-color .2s}
@@ -36,7 +40,8 @@ h1,h2,h3,.font-display{font-family:'Montserrat',Arial,sans-serif}
 .pwd-btn{width:100%;padding:13px;background:var(--azul-principal);color:var(--amarelo-acento);border:none;border-radius:10px;font-size:14px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:background .2s;font-family:'Montserrat',sans-serif}
 .pwd-btn:hover{background:var(--azul-secundaria);color:#fff}
 .pwd-error{color:#cc0000;font-size:12px;margin-top:10px;min-height:18px;font-family:Arial,sans-serif}
-.pwd-footer{margin-top:20px;font-size:11px;color:rgba(255,255,255,0.4);font-family:Arial,sans-serif}
+.pwd-partners{display:flex;align-items:center;justify-content:center;gap:44px;margin-top:34px;flex-wrap:wrap}
+.pwd-partners img{height:52px;max-width:150px;object-fit:contain;opacity:0.85}
 
 /* HEADER */
 .header{background:var(--azul-principal);border-radius:16px;padding:32px;text-align:center;margin-bottom:26px;position:relative;overflow:hidden}
@@ -121,18 +126,30 @@ a.card:hover{border-color:var(--azul-secundaria);transform:translateY(-3px);box-
 
 <!-- PASSWORD OVERLAY -->
 <div id="pwd-overlay">
-  <div class="pwd-box">
-    <div class="pwd-eyebrow">Instituto BR Arte</div>
-    <div class="pwd-title">Portal Restrito - Prospera Rio</div>
-    <div class="pwd-hint">Digite a senha para acessar o sistema de monitoramento</div>
-    <div class="pwd-input-wrap">
-      <input class="pwd-input" type="password" id="pwd-field" placeholder="********" autocomplete="off" onkeydown="if(event.key==='Enter')checkPwd()">
-      <button class="pwd-toggle" onclick="togglePwd()" title="Mostrar/ocultar senha">MOSTRAR</button>
+  <div class="pwd-wrap">
+
+    <div class="pwd-banner">
+      <img class="pwd-banner-logo" src="assets/prospera-rio.png" alt="Prospera Rio">
     </div>
-    <button class="pwd-btn" onclick="checkPwd()">ACESSAR PORTAL</button>
-    <div class="pwd-error" id="pwd-error"></div>
+
+    <div class="pwd-box">
+      <img class="pwd-box-logo" src="assets/prospera-rio.png" alt="Prospera Rio">
+      <div class="pwd-title">Sistema de Monitoramento<br>Operacional</div>
+      <div class="pwd-hint">Acesso restrito - Coordenação Instituto BR Arte</div>
+      <div class="pwd-input-wrap">
+        <input class="pwd-input" type="password" id="pwd-field" placeholder="Senha de acesso" autocomplete="off" onkeydown="if(event.key==='Enter')checkPwd()">
+        <button class="pwd-toggle" onclick="togglePwd()" title="Mostrar/ocultar senha">MOSTRAR</button>
+      </div>
+      <button class="pwd-btn" onclick="checkPwd()">ACESSAR SISTEMA</button>
+      <div class="pwd-error" id="pwd-error"></div>
+    </div>
+
+    <div class="pwd-partners">
+      <img src="assets/logo-instituto-br-arte.png" alt="Instituto BR Arte">
+      <img src="assets/SEBRAE_b.png" alt="SEBRAE RJ">
+    </div>
+
   </div>
-  <div class="pwd-footer">Projeto Prospera Rio - Instituto BR Arte x SEBRAE RJ</div>
 </div>
 
 <div class="wrap">
@@ -313,6 +330,20 @@ a.card:hover{border-color:var(--azul-secundaria);transform:translateY(-3px);box-
       <div class="card-title">Relatórios Enviados ao SEBRAE</div>
       <div class="card-desc">Série completa de RAMs e Anexos RAT entregues - junho de 2025 a fevereiro de 2026</div>
       <div class="card-link">Abrir pasta</div>
+    </a>
+
+  </div>
+
+  <!-- RECURSOS PARA O EMPREENDEDOR -->
+  <div class="section-title">Recursos para o Empreendedor</div>
+  <div class="section-sub">Conteúdo disponibilizado diretamente aos empreendedores atendidos pelo projeto</div>
+  <div class="grid">
+
+    <a class="card" href="https://lucienemunizestrategia-sudo.github.io/prosperariomareejacarezinho/" target="_blank">
+      <div class="card-badge badge-teal">Portal Online</div>
+      <div class="card-title">Central do Empreendedor - Prospera Rio</div>
+      <div class="card-desc">Ambiente digital com orientações, materiais de apoio e acompanhamento voltado aos empreendedores da Maré e do Jacarezinho</div>
+      <div class="card-link">Acessar central</div>
     </a>
 
   </div>
